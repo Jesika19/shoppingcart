@@ -6,7 +6,7 @@ class Cart {
   protected $productRefs = array(); 
   protected $voucher;
   protected $total;   
-  public static $subTotal;
+  protected $subTotal;
   
   //Constructor
   function __construct($products = '',$productRefs = '',$voucher = '',$total = '',$subTotal = ''){   
@@ -35,40 +35,60 @@ class Cart {
     return self::$subTotal;
   }
 
-  // public function getSubTotal(){
-
-  //   return $this->subTotal;
-  // }
-
 
 
   //Add Product
   public function addProduct(Product $product,$quantity){ 
       $productRef = $product->getProductRef();
-      return $this->products = [$productRef =>["quantity" => $quantity]];    
+      return $this->products = [$productRef =>["quantity" => $quantity]];
+      $this->productRefs[] = $productRef;
+
   }
 
 
 
-  //Remove Product
-  public function removeProduct(Product $product){
-    $productRef = $product->getProductRef();
+  // //Remove Product
+  // public function removeProduct(Product $product){
+  //   $productRef = $product->getProductRef();
+  //   if (isset($this->products[$productRef])) {
+  //       unset($this->products[$productRef]);
+
+  //       // Remove the stored productRef, too:
+  //       $index = array_search($productRef, $productRefs);
+  //       unset($this->productRefs[$index]);
+
+  //       // Recreate that array to prevent holes:
+  //       $this->productRefs = array_values($this->productRefs);
+  //   }
+  
+  // }
+
+   public function removeProduct(Product $product){
+     $productRef = $product->getProductRef();
     if (isset($this->products[$productRef])) {
         unset($this->products[$productRef]);
-
         // Remove the stored productRef, too:
         $index = array_search($productRef, $this->productRefs);
         unset($this->productRefs[$index]);
-
         // Recreate that array to prevent holes:
         $this->productRefs = array_values($this->productRefs);
     }
   
   }
+
+  
   
   //Update products
-  public function updateProduct(){
+  public function updateProduct(Product $product,$quantity){
+     $productRef = $product->getProductRef();
+    if ($quantity === 0) {
+            $this->deleteItem($product);
+       }
+     elseif ( ($quantity > 0) && ($quantity != $this->products[$productRef]['quantity'])) {
+        $this->products[$productRef]['quantity'] = $quantity;
+    }
 
+    
 
   }
   
@@ -79,10 +99,13 @@ class Cart {
   }
 
  //Calculate subtotal
-  //  public static function calculateSubTotal($voucher){  
-  //   return self::$subTotal += ($total *(100-$voucher)/100);    
-  // }
 
+ public  function calculateSubTotal(Product $product,$voucher){
+    $quantity = $product->getQuantity();
+    $price = $product->getPrice(); 
+    $this->total = ($quantity * $price);     
+    return $subTotal = ($this->total *(100-$voucher)/100);    
+  }
 
 
 }  
