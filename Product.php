@@ -4,16 +4,16 @@ class Product {
   protected $productCategory;
   protected $name;
   protected $description;
-  protected $quantity;
+  //protected $quantity;
   protected $price;  
       
   //Constructor
-  function __construct($productRef = ' ',$productCategory = ' ',$name = ' ',$description = ' ',$quantity = ' ',$price = ' '){
+  function __construct($productRef = ' ',$productCategory = ' ',$name = ' ',$description = ' ',$price = ' '){
     $this->productRef = $productRef; 
     $this->productCategory = $productCategory;
     $this->name = $name;
     $this->description = $description;
-    $this->quantity = $quantity;
+    //$this->quantity = $quantity;
     $this->price = $price;  
   }
 
@@ -34,9 +34,9 @@ class Product {
     return $this->description;
   }
 
-  public function getQuantity(){
-    return $this->quantity;
-  }
+  // public function getQuantity(){
+  //   return $this->quantity;
+  // }
 
   public function getPrice(){
     return $this->price;
