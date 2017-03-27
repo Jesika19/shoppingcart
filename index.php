@@ -43,13 +43,13 @@ $foodItemTwo = new Food("F2","Food","Juice","red",10,"12/01/18");
 $cartOne->addProduct($foodItemOne,6);
 $cartOne->addProduct($foodItemTwo,4);
 
-$cartOne->updateProduct($foodItemOne,10);
+$cartOne->updateProduct($foodItemOne,2);
 
 $cartOne->calculateTotal($foodItemOne);
 $cartOne->calculateTotal($foodItemTwo);
 
 //$cartOne->removeProduct($foodItemTwo);
-//($cartOne->calculateSubTotal($foodItemOne,10))+($cartOne->calculateSubTotal($foodItemTwo,10));
+($cartOne->calculateSubTotal($foodItemOne,10))+($cartOne->calculateSubTotal($foodItemTwo,10));
 //$cartOne->calculateSubTotal($foodItemOne,10);
 
 //var_dump($cartOne->calculateSubTotal($foodItemOne,10));
@@ -59,14 +59,14 @@ $totals = $cartOne->getTotal();
 
 
 
-//$subTotals = $cartOne->getSubTotal();
+$subTotals = $cartOne->getSubTotal();
 
 print_r($products);
 echo PHP_EOL;
 print_r($totals);
 echo PHP_EOL;
 
-//print_r($subTotals);
+print_r($subTotals);
 
 
 exit;
