@@ -49,14 +49,24 @@ $cartOne->calculateTotal($foodItemOne);
 $cartOne->calculateTotal($foodItemTwo);
 
 //$cartOne->removeProduct($foodItemTwo);
-$totals = $cartOne->getTotal();
+//($cartOne->calculateSubTotal($foodItemOne,10))+($cartOne->calculateSubTotal($foodItemTwo,10));
+//$cartOne->calculateSubTotal($foodItemOne,10);
+
+//var_dump($cartOne->calculateSubTotal($foodItemOne,10));
 
 $products = $cartOne->getProducts();
+$totals = $cartOne->getTotal();
 
+
+
+//$subTotals = $cartOne->getSubTotal();
 
 print_r($products);
-
+echo PHP_EOL;
 print_r($totals);
+echo PHP_EOL;
+
+//print_r($subTotals);
 
 
 exit;
