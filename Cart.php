@@ -60,10 +60,11 @@
   //Calculate total 
   public function calculateTotal(Product $product){
     $price = $product->getPrice();  
-    foreach($this->products as $item){          
-      if (array_key_exists('quantity', $item)) {
-        $quantity = $item['quantity'];
+    foreach($this->products as $product){          
+      if (array_key_exists('quantity', $product)) {
+        $quantity = $product['quantity'];
         $this->total = $price * $quantity;
+         
       }
     }      
   }
