@@ -94,3 +94,24 @@
 
 
 }
+
+
+
+/*public  function calculateSubTotal(Product $product){
+
+    foreach($this->products as $product){  
+           
+      if (array_key_exists('quantity',$product)) {
+        if (array_key_exists('item',$product)) {
+            //$productRef = $product[$productRef];                     
+            $quantity = $product['quantity'];    
+            $price = $product['item']->getPrice();
+            //$productRef = $product[$productRef];  
+            $this->subTotal = ($price * $quantity) * ((100-($this->voucher))/100);    
+            
+        }       
+        
+      }
+    }    
+  
+  }*/

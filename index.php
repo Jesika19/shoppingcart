@@ -13,6 +13,11 @@ $productOne = new Product();
 $foodItemOne = new Food("F1","Food","Wine","red",12,"12/01/20");
 $foodItemTwo = new Food("F2","Food","Juice","red",10,"12/01/18");
 
+
+/*Clothing*/
+//$clothingItemOne = new Clothing("C1","Jean","Villa","skinny",30,"small","blue");
+//$voucher = 10;
+
 // /*Food Item One*/
 // echo "Product Ref:"."".$foodItemOne->getProductRef().PHP_EOL;
 
@@ -43,56 +48,37 @@ $foodItemTwo = new Food("F2","Food","Juice","red",10,"12/01/18");
 $cartOne->addProduct($foodItemOne,6);
 $cartOne->addProduct($foodItemTwo,4);
 
+//$cartOne->addProduct($clothingItemOne,2);
+
 $cartOne->updateProduct($foodItemOne,2);
 
-$cartOne->calculateTotal($foodItemOne);
-//$cartOne->calculateTotal($foodItemTwo);
 
+
+// $cartOne->calculateTotal($foodItemOne,$foodItemTwo,$clothingItemOne);
+
+$cartOne->calculateTotal($foodItemOne);
+$cartOne->calculateTotal($foodItemTwo);
+//$cartOne->calculateTotal($clothingItemOne);
 //$cartOne->removeProduct($foodItemTwo);
-//($cartOne->calculateSubTotal($foodItemOne,10))+($cartOne->calculateSubTotal($foodItemTwo,10));
-$cartOne->calculateSubTotal($foodItemOne,10);
-//$cartOne->calculateSubTotal($foodItemTwo,10);
+//($cartOne->calculateSubTotal($foodItemOne))+($cartOne->calculateSubTotal($foodItemTwo));
+// $cartOne->calculateSubTotal($foodItemOne,10);
+// $cartOne->calculateSubTotal($foodItemTwo,10);
+//$cartOne->calculateSubTotal($clothingItemOne,10);
+
 //var_dump($cartOne->calculateSubTotal($foodItemOne,10));
 
 $products = $cartOne->getProducts();
 $totals = $cartOne->getTotal();
 
 
-
-$subTotals = $cartOne->getSubTotal();
+// $subTotals = $cartOne->getSubTotal();
 
 print_r($products);
 echo PHP_EOL;
 print_r($totals);
 echo PHP_EOL;
+//print_r($subTotals);
 
-print_r($subTotals);
 
 
-exit;
-
-/*Add,Update and Remove products */
-//var_Dump($cartOne->addProduct($foodItemOne,6));
-
-//var_Dump($cartOne->updateProduct($foodItemOne,6));
-
-//var_Dump($cartOne->addProduct($foodItemTwo,4));
-
-//var_Dump($cartOne->removeProduct($foodItemTwo));
-
-//print_R($cartOne->addProduct($foodItemOne,5));
-
-/*Total*/
-// echo "Total 1 :$"."".($cartOne->calculateTotal($foodItemOne,6)).PHP_EOL;
-// echo "Total 2 :$"."".($cartOne->calculateTotal($foodItemTwo,4)).PHP_EOL;
-
-echo "Total 1 :$"."".($cartOne->calculateTotal($foodItemOne)).PHP_EOL;
-
-echo "Total 2 :$"."".($cartOne->calculateTotal($foodItemTwo)).PHP_EOL;
-
-/*Subtotal*/
-//echo "Sub-Total:$"."".($cartOne->calculateSubTotal($foodItemOne,10)+ $cartOne->calculateSubTotal($foodItemTwo,10)).PHP_EOL;
-//echo "Sub-Total:$"."".($cartOne->calculateSubTotal($foodItemOne,6,10)+ $cartOne->calculateSubTotal($foodItemTwo,4,10));
-//echo "Sub-Total:$".($cartOne->calculateSubTotal($foodItemOne)).PHP_EOL;
-echo "Sub-Total:$"."".($cartOne->calculateSubTotal($foodItemOne,10)+ $cartOne->calculateSubTotal($foodItemTwo,10)).PHP_EOL;
 ?>

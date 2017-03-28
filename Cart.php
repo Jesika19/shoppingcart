@@ -60,52 +60,62 @@
      
   //Calculate total 
   public function calculateTotal(Product $product){
-    //$price = $product->getPrice();
-    $productRef = $product->getProductRef();   
+    $productRef = $product->getProductRef();       
     foreach($this->products as $product){  
-           
+         
       if (array_key_exists('quantity',$product)) {
         if (array_key_exists('item',$product)) {
             //$productRef = $product[$productRef];                     
-            $quantity = $product['quantity'];    
+            $quantity = $product['quantity'];
+            var_Dump($quantity);
+        
             $price = $product['item']->getPrice();
-            //$productRef = $product[$productRef];  
-            $this->total[][$productRef]['total'] = $price * $quantity;
+
+            var_Dump($price);
+            //if (isset($this->total['total'])) {
+               
+                $this->total['total'][$productRef] = $price * $quantity;
+            //}
+             
+           // $this->total['total'][] = $price * $quantity;
             
+                               
         }       
         
       }
+     
     } 
 
+         
+
   }
 
-   //Add Product
-  public function addVoucher($voucher){ 
-    // $productRef = $product->getProductRef();
-    // $this->products[$productRef] = ["quantity" => $quantity, "item" => $product];  
-  }
+
+  
+
 
    //Calculate SubTotal  
-  public  function calculateSubTotal(Product $product,$voucher){
+  /*public  function calculateSubTotal(Product $product,$voucher){
 
     foreach($this->products as $product){  
            
       if (array_key_exists('quantity',$product)) {
-        if (array_key_exists('item',$product)) {
-            //$productRef = $product[$productRef];                     
+        if (array_key_exists('item',$product)) {                  
             $quantity = $product['quantity'];    
             $price = $product['item']->getPrice();
             //$productRef = $product[$productRef];  
-            $this->subTotal += ($price * $quantity)* ((100-$voucher)/100);    
-            
-        }       
+           
+          
+        }   
+               
         
       }
-    } 
-   
-  
-  }
+    }
+    $this->subTotal += ($price * $quantity)* ((100-$voucher)/100);
+       
+  }*/
 
+  
 }
 
 ?>
