@@ -61,7 +61,7 @@
   //Calculate total 
   public function calculateTotal(Product $product){
     //$price = $product->getPrice();
-    $productRef = $product->getProductRef();   
+    //$productRef = $product->getProductRef();   
     foreach($this->products as $product){  
            
       if (array_key_exists('quantity',$product)) {
@@ -69,7 +69,8 @@
             //$productRef = $product[$productRef];                     
             $quantity = $product['quantity'];    
             $price = $product['item']->getPrice();
-            $this->total[][$productRef] = $price * $quantity;
+            //$productRef = $product[$productRef];  
+            $this->total[]['total'] = $price * $quantity;
             
         }       
         
@@ -81,15 +82,21 @@
    //Calculate SubTotal  
   public  function calculateSubTotal(Product $product,$voucher){
 
-    // $price = $product->getPrice();
-    // $productRef = $product->getProductRef();  
-    //foreach($this->products as $product){          
-      //if (array_key_exists('quantity',$product)) {      
-        //$quantity = $product['quantity'];         
-        $this->subTotal[] = $this->calculateTotal($product) * ((100-$voucher)/100);       
+    foreach($this->products as $product){  
+           
+      if (array_key_exists('quantity',$product)) {
+        if (array_key_exists('item',$product)) {
+            //$productRef = $product[$productRef];                     
+            $quantity = $product['quantity'];    
+            $price = $product['item']->getPrice();
+            //$productRef = $product[$productRef];  
+            $this->subTotal[]['subtotal'] += ($price * $quantity)* ((100-$voucher)/100);    
             
-     // }
-    //}    
+        }       
+        
+      }
+    } 
+   
   
   }
 
