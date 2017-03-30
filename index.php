@@ -10,49 +10,79 @@ $cartOne = new Cart();
 $productOne = new Product();
 
 /*Food*/
-$foodItemOne = new Food("F1","Food","Wine","red",5,12,12/01/20);
-
-$foodItemTwo = new Food("F2","Food","Juice","red",5,6,10,"",12/01/20);
-
-
-echo "Product Ref:"."".$foodItemOne->getProductRef().PHP_EOL;
-
-echo "Product Category:"."".$foodItemOne->getProductCategory().PHP_EOL;
-
-echo "Name:"."".$foodItemOne->getName().PHP_EOL;
-
-echo "Description:"."".$foodItemOne->getDescription().PHP_EOL;
-
-echo "Quantity:"."".$foodItemOne->getQuantity().PHP_EOL;
-
-echo "Price:$"."".$foodItemOne->getPrice().PHP_EOL;
+$foodItemOne = new Food("F1","Food","Wine","red",12,"12/01/20");
+$foodItemTwo = new Food("F2","Food","Juice","red",10,"12/01/18");
 
 
-echo "Product Ref:"."".$foodItemTwo->getProductRef().PHP_EOL;
+/*Clothing*/
+//$clothingItemOne = new Clothing("C1","Jean","Villa","skinny",30,"small","blue");
+//$voucher = 10;
 
-echo "Product Category:"."".$foodItemTwo->getProductCategory().PHP_EOL;
+// /*Food Item One*/
+// echo "Product Ref:"."".$foodItemOne->getProductRef().PHP_EOL;
 
-echo "Name:"."".$foodItemTwo->getName().PHP_EOL;
+// echo "Product Category:"."".$foodItemOne->getProductCategory().PHP_EOL;
 
-echo "Description:"."".$foodItemTwo->getDescription().PHP_EOL;
+// echo "Name:"."".$foodItemOne->getName().PHP_EOL;
 
-echo "Quantity:"."".$foodItemTwo->getQuantity().PHP_EOL;
+// echo "Description:"."".$foodItemOne->getDescription().PHP_EOL;
 
-echo "Price:$"."".$foodItemTwo->getPrice().PHP_EOL;
+// echo "Price:$"."".$foodItemOne->getPrice().PHP_EOL;
+
+// echo "Expiring Date:"."".$foodItemOne->getExpiringDate().PHP_EOL; 
+
+// /*Food Item Two*/
+// echo "Product Ref:"."".$foodItemTwo->getProductRef().PHP_EOL;
+
+// echo "Product Category:"."".$foodItemTwo->getProductCategory().PHP_EOL;
+
+// echo "Name:"."".$foodItemTwo->getName().PHP_EOL;
+
+// echo "Description:"."".$foodItemTwo->getDescription().PHP_EOL;
+
+// echo "Price:$"."".$foodItemTwo->getPrice().PHP_EOL;
+
+// echo "Expiring Date:"."".$foodItemTwo->getExpiringDate().PHP_EOL;
+
+/*Add,Update and Remove products */
+$cartOne->addProduct($foodItemOne,6);
+$cartOne->addProduct($foodItemTwo,4);
+
+//$cartOne->addProduct($clothingItemOne,2);
+
+$cartOne->updateProduct($foodItemOne,2);
 
 
 
-//echo $cartOne->addProduct($foodItemOne,5);
+// $cartOne->calculateTotal($foodItemOne,$foodItemTwo,$clothingItemOne);
 
-//var_Dump($cartOne->addProduct($foodItemOne,5));
-//var_Dump($cartOne->addProduct($foodItemOne,2));
-//print_R($cartOne->addProduct($foodItemOne,5));
-//var_Dump($cartOne->removeProduct($foodItemOne));
+//$cartOne->calculateTotal($foodItemOne);
+//$cartOne->calculateTotal($foodItemTwo);
 
-echo "Total 1 :$"."".($cartOne->calculateTotal($foodItemOne)).PHP_EOL;
-echo "Total 2 :$"."".($cartOne->calculateTotal($foodItemTwo)).PHP_EOL;
-/*Subtotal*/
-//echo "Sub-Total:$".($cartOne->calculateTotal($foodItemOne)+$cartOne->calculateTotal($foodItemTwo)).PHP_EOL;
+
+$cartOne->calculateTotal();
+
+//$cartOne->calculateTotal($clothingItemOne);
+//$cartOne->removeProduct($foodItemTwo);
+//($cartOne->calculateSubTotal($foodItemOne))+($cartOne->calculateSubTotal($foodItemTwo));
+// $cartOne->calculateSubTotal($foodItemOne,10);
+// $cartOne->calculateSubTotal($foodItemTwo,10);
+//$cartOne->calculateSubTotal($clothingItemOne,10);
+$cartOne->calculateSubTotal(10);
+//var_dump($cartOne->calculateSubTotal($foodItemOne,10));
+
+$products = $cartOne->getProducts();
+$totals = $cartOne->getTotal();
+
+
+$subTotals = $cartOne->getSubTotal();
+
+print_r($products);
+echo PHP_EOL;
+print_r($totals);
+echo PHP_EOL;
+print_r($subTotals);
+
 
 
 ?>

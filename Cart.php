@@ -1,90 +1,230 @@
 <?php
-class Cart {
-
-  protected $products = array();
-    
-  protected $productRefs = array(); 
+  class Cart {
+  protected $products = [];    
+  protected $quantity;
   protected $voucher;
-  protected $total;   
-  public static $subTotal;
+  protected $total = [];   
+  protected $subTotal;
+
   
   //Constructor
-  function __construct($products = '',$productRefs = '',$voucher = '',$total = '',$subTotal = ''){   
+  function __construct($products = [],$quantity = 0,$voucher = 0,$total = [],$subTotal = 0){     
     $this->products = $products;
-    $this->productRefs = $productRefs;
+    $this->quantity = $quantity;  
     $this->voucher = $voucher;   
     $this->total = $total;    
     $this->subTotal = $subTotal;  
   }
-
+  
+ 
   //Get
   public function getProducts(){
     return $this->products;
   }
-
+  public function getQuantity(){
+    return $this->quantity;
+  }
   public function getVoucher(){
     return $this->voucher;
   }
-
   public function getTotal(){
     return $this->total;
   }
-
-  public function getSubTotal(){
-   // $total = $product->getTotal();
-    return self::$subTotal;
+  public function getSubTotal(){  
+    return $this->subTotal;
   }
-
-  // public function getSubTotal(){
-
-  //   return $this->subTotal;
-  // }
-
-
 
   //Add Product
   public function addProduct(Product $product,$quantity){ 
-      $productRef = $product->getProductRef();
-      return $this->products = [$productRef =>["quantity" => $quantity]];    
+    $productRef = $product->getProductRef();
+    $this->products[$productRef] = ["quantity" => $quantity, "item" => $product];  
   }
-
-
-
   //Remove Product
   public function removeProduct(Product $product){
+    $productRef = $product->getProductRef();   
+    if (isset($this->products[$productRef])){
+        unset($this->products[$productRef]);               
+    }    
+  }
+  
+  //Update product
+  public function updateProduct(Product $product,$quantity){
     $productRef = $product->getProductRef();
-    if (isset($this->products[$productRef])) {
-        unset($this->products[$productRef]);
-
-        // Remove the stored productRef, too:
-        $index = array_search($productRef, $this->productRefs);
-        unset($this->productRefs[$index]);
-
-        // Recreate that array to prevent holes:
-        $this->productRefs = array_values($this->productRefs);
+    if (($quantity > 0) && ($quantity != $this->products[$productRef]['quantity'])) {
+        $this->products[$productRef]['quantity'] = $quantity;
     }
-  
-  }
-  
-  //Update products
-  public function updateProduct(){
-
-
-  }
-  
-  public function calculateTotal(Product $product){
-    $quantity = $product->getQuantity();
-    $price = $product->getPrice(); 
-    return $total = ($quantity * $price);   
+    else {
+        $this->removeProduct($product);
+    }
   }
 
- //Calculate subtotal
-  //  public static function calculateSubTotal($voucher){  
-  //   return self::$subTotal += ($total *(100-$voucher)/100);    
-  // }
+
+  //Calculate total 
+  //public function calculateTotal(Product $product){
+  public function calculateTotal(){
+    //$productRef = $product->getProductRef();
+
+        
+      foreach($this->products as $product){ 
+
+
+          
+          if (array_key_exists('quantity',$product)) {
+            if (array_key_exists('item',$product)) {
+                //$productRef = $product[$productRef];                     
+                $quantity = $product['quantity'];
+                var_Dump($quantity);
+            
+                $price = $product['item']->getPrice();
+             
+
+                var_Dump($price);
+                //if (isset($this->total['total'])) {
+
+
+                 //foreach($this->total as $value){
+                  //   if (in_array($productRef,$value)) {
+                 //$this->total[$productRef]['total'][] = $price * $quantity;
+                    
+                   
+                    // if(array_key_exists('total',$value)) {    
+                    //$this->total['total'][$productRef] = $price * $quantity;
+                    //$this->total['total'][$productRef][] = $price * $quantity;
+                       //if ($key){{
+                         //if (!isset($this->total[$productRef]['total'])){
+                              //if (!array_key_exists([$productRef] ['total'], $this->total)){
+                             
+                                  //$this->total[$productRef]['total'][] = $price * $quantity;
+                                  $this->total[]['total'] = $price * $quantity;
+                              
+                              //}
+                             //var_Dump( $this->total[$productRef]['total']);
+                              //}
+                       
+                        
+                         
+                      //  $key = array_search('total',$this->total);
+                
+                    
+
+                    //}
+                  
+                 //}
+                  // }
+                  
+                //}
+                
+              // $this->total['total'][] = $price * $quantity;
+                     
+            }       
+            
+          }
+
+  
+        
+      
+      } 
+  
+                                  
+  
+
+   
+    
+
+
+  }
+     
+  //Calculate total 
+ /* public function calculateTotal(Product $product){
+    $productRef = $product->getProductRef();       
+    foreach($this->products as $product){  
+         
+      if (array_key_exists('quantity',$product)) {
+        if (array_key_exists('item',$product)) {
+            //$productRef = $product[$productRef];                     
+            $quantity = $product['quantity'];
+            var_Dump($quantity);
+        
+            $price = $product['item']->getPrice();
+
+            var_Dump($price);
+            //if (isset($this->total['total'])) {
+
+
+              // foreach($this->total as $value){
+              //   if (in_array($productRef,$value)) {
+                
+                
+                  //$this->total['total'][$productRef] = $price * $quantity;
+             //$this->total['total'][$productRef][] = $price * $quantity;
+             $this->total[$productRef]['total'][] = $price * $quantity;
+            
+              //   }
+              // }
+               
+            //}
+             
+           // $this->total['total'][] = $price * $quantity;
+          
+                               
+        }       
+        
+      }
+     
+    } 
 
 
 
-}  
+  }*/
+
+
+   //Calculate SubTotal  
+  public  function calculateSubTotal($voucher){
+
+    foreach($this->total as $key){  
+           
+      if (array_key_exists('total',$key)) {
+        //if (array_key_exists('item',$product)) {                  
+            $totalProduct = $key['total'];    
+            //$price = $product['item']->getPrice();
+            //$productRef = $product[$productRef];
+            
+            $this->subTotal += ($totalProduct)* ((100-$voucher)/100);  
+           
+          
+        //}   
+               
+        
+      }
+    }
+   
+  }
+  
+
+
+   //Calculate SubTotal  
+ /* public  function calculateSubTotal($voucher){
+
+    foreach($this->products as $product){  
+           
+      if (array_key_exists('quantity',$product)) {
+        if (array_key_exists('item',$product)) {                  
+            $quantity = $product['quantity'];    
+            $price = $product['item']->getPrice();
+            //$productRef = $product[$productRef];
+            
+            $this->subTotal += ($price * $quantity)* ((100-$voucher)/100);  
+           
+          
+        }   
+               
+        
+      }
+    }
+   
+  }*/
+
+  
+}
 
 ?>
