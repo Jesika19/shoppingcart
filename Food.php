@@ -18,8 +18,8 @@ class Food extends Product{
           $this->expiringDate=$expiringDate;
     }
     else {
-      throw new Exception("Invalid Date:The product has already expired.It cannot be inserted into the cart.Please remove it.");
-      //print("Invalid Date:The product has already expired.It cannot be inserted into the cart").PHP_EOL;     
+      //throw new Exception("Invalid Date:The product has already expired.It cannot be inserted into the cart.Please remove it.");
+      print("Invalid Date:The product has already expired.It cannot be inserted into the cart").PHP_EOL;     
     }
 
   }
